@@ -57,6 +57,39 @@ const Tokenomics = () => {
     }
   ];
 
+  const tokenAllocation = [
+    {
+      name: "Fair Launch",
+      percentage: 60,
+      color: "bg-sky-500"
+    },
+    {
+      name: "AI Incentive Pool",
+      percentage: 15,
+      color: "bg-emerald-500"
+    },
+    {
+      name: "Ecosystem Incentives & Community Growth",
+      percentage: 5,
+      color: "bg-violet-500"
+    },
+    {
+      name: "Staking Rewards",
+      percentage: 10,
+      color: "bg-amber-500"
+    },
+    {
+      name: "DAO Treasury",
+      percentage: 5,
+      color: "bg-rose-500"
+    },
+    {
+      name: "Team & Advisors",
+      percentage: 5,
+      color: "bg-indigo-500"
+    }
+  ];
+
   return (
     <section id="tokenomics" className="py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,7 +113,7 @@ const Tokenomics = () => {
                     <p className="text-4xl text-sky-400 font-mono tracking-tight">$PRIV</p>
                   </div>
                 </FadeIn>
-                <FadeIn delay={200}>
+                <FadeIn delay={400}>
                   <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 hover:border-sky-500/20 transition-all duration-300">
                     <h3 className="text-xl font-semibold text-gray-400 mb-2">Total Supply</h3>
                     <p className="text-4xl text-sky-400 font-mono tracking-tight">1,000,000,000</p>
@@ -90,8 +123,52 @@ const Tokenomics = () => {
             </div>
           </div>
 
+          {/* Token Allocation */}
+          <FadeIn delay={600}>
+            <div className="max-w-4xl mx-auto mb-20">
+              <h3 className="text-2xl font-semibold text-white mb-8 text-center">Token Allocation</h3>
+              
+              {/* Allocation Chart */}
+              <div className="relative h-4 bg-gray-800 rounded-full overflow-hidden mb-8">
+                {tokenAllocation.map((item, index) => {
+                  const left = tokenAllocation
+                    .slice(0, index)
+                    .reduce((acc, curr) => acc + curr.percentage, 0);
+                  return (
+                    <div
+                      key={item.name}
+                      className={`absolute h-full ${item.color} transition-all duration-500`}
+                      style={{
+                        left: `${left}%`,
+                        width: `${item.percentage}%`
+                      }}
+                    />
+                  );
+                })}
+              </div>
+
+              {/* Allocation Details */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {tokenAllocation.map((item) => (
+                  <div
+                    key={item.name}
+                    className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4 hover:border-sky-500/20 transition-all duration-300 flex items-center"
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <div className="flex items-center justify-center gap-3">
+                        <div className={`w-3 h-3 rounded-full ${item.color} flex-shrink-0`} />
+                        <h4 className="text-white font-medium">{item.name}</h4>
+                      </div>
+                      <p className="text-2xl font-mono text-sky-400">{item.percentage}%</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FadeIn>
+
           {/* Utility table */}
-          <FadeIn delay={400}>
+          <FadeIn delay={800}>
             <div className="max-w-4xl mx-auto">
               <div className="relative overflow-hidden rounded-2xl border border-gray-700/50">
                 {/* Table */}
