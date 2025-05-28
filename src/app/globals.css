@@ -22,5 +22,58 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'DM Sans', Helvetica, sans-serif;
+  @apply bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 min-h-screen;
+}
+
+/* Marquee Animation Styles */
+.marquee-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.marquee-container::before,
+.marquee-container::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-container::before {
+  top: 0;
+  background: linear-gradient(to bottom, #102033 0%, transparent 100%);
+}
+
+.marquee-container::after {
+  bottom: 0;
+  background: linear-gradient(to top, rgb(20, 27, 43) 0%, transparent 100%);
+}
+
+.marquee-scroll {
+  display: flex;
+  flex-direction: column;
+  animation: marquee-scroll linear infinite;
+}
+
+.marquee-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.marquee-scroll > .marquee-content + .marquee-content {
+  margin-top: 1rem;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
 }
